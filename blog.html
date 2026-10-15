@@ -1,41 +1,119 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ブログ | ひとはり手帳</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sky: #a8dcee;
+  --sky-deep: #5fb4d4;
+  --sky-pale: #e3f4fa;
+  --cream: #fff7e0;
+  --cream-deep: #f4e5bd;
+  --paper: #fffcf3;
+  --ink: #2b5566;
+  --ink-soft: #4d7384;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+  line-height: 1.9;
+  font-size: 16px;
+}
+a { color: inherit; }
+a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+
+/* ヘッダー：ギンガムチェックの布 */
+.site-header {
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.45) 0 14px, transparent 14px 28px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.45) 0 14px, transparent 14px 28px),
+    var(--sky);
+  border-bottom: 3px dashed var(--ink);
+  padding: 14px 20px;
+}
+.header-inner {
+  max-width: 960px; margin: 0 auto;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px;
+}
+.logo {
+  background: var(--cream);
+  padding: 4px 18px;
+  border: 2px dashed var(--ink);
+  border-radius: 8px;
+  font-weight: 700; font-size: 1.15rem; text-decoration: none; letter-spacing: .08em;
+}
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 8px; }
+nav a {
+  display: block; padding: 4px 16px; border-radius: 999px;
+  background: var(--cream); text-decoration: none; font-weight: 500; font-size: .95rem;
+}
+nav a:hover, nav a[aria-current="page"] { background: var(--ink); color: var(--cream); }
+
+main { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+.page-title { padding: 48px 0 8px; }
+.page-title h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); margin: 0 0 8px; letter-spacing: .04em; }
+.page-title p { margin: 0; color: var(--ink-soft); }
+
+/* つぶやき形式のタイムライン（縫い目の線でつながる） */
+.timeline { list-style: none; margin: 32px 0 48px; padding: 0 0 0 36px; position: relative; }
+.timeline::before {
+  content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px;
+  border-left: 3px dashed var(--sky-deep);
+}
+.post { position: relative; background: var(--paper); border: 2px dashed var(--sky-deep); border-radius: 14px; padding: 14px 20px 16px; margin-bottom: 18px; }
+.post::before {
+  content: ""; position: absolute; left: -33px; top: 20px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--cream); border: 3px solid var(--ink);
+}
+.post time { display: block; font-size: .85rem; color: var(--ink-soft); font-weight: 700; }
+.post p { margin: 2px 0 0; }
+
+footer { background: var(--sky); border-top: 3px dashed var(--ink); text-align: center; padding: 18px 20px; font-size: .9rem; }
+</style>
 </head>
 <body>
 
-<header>
-  <h1>Blog</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="blog.html">Blog</a>
-    <a href="about.html">About</a>
-  </nav>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">ひとはり手帳</a>
+    <nav aria-label="メインメニュー">
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="blog.html" aria-current="page">ブログ</a></li>
+        <li><a href="gallery.html">ギャラリー</a></li>
+        <li><a href="about.html">このサイトについて</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<section class="blog">
+<main>
+  <div class="page-title">
+    <h1>ブログ</h1>
+    <p>裁縫の勉強の進み具合を、日付と一言で記録しています。</p>
+  </div>
 
-  <article>
-    <h2>なぜこの布を選んだか</h2>
-    <p>
-      今回は少し粗めの布を使った。<br>
-      完璧じゃない質感の方が、長く使える気がしたから。
-    </p>
-  </article>
+  <!-- 新しい記録は、一番上に<li>をコピーして追加します -->
+  <ul class="timeline">
+    <li class="post"><time datetime="2026-10-15">2026.10.15</time><p>ここに今日の勉強の進み具合を書きます。例：まつり縫いの練習をした。</p></li>
+    <li class="post"><time datetime="2026-10-14">2026.10.14</time><p>ここに前の日の記録が入ります。</p></li>
+    <li class="post"><time datetime="2026-10-13">2026.10.13</time><p>ここにさらに前の日の記録が入ります。</p></li>
+    <li class="post"><time datetime="2026-10-12">2026.10.12</time><p>ここに記録が入ります。</p></li>
+    <li class="post"><time datetime="2026-10-11">2026.10.11</time><p>ここに記録が入ります。</p></li>
+  </ul>
+</main>
 
-  <article>
-    <h2>ミシンで失敗した話</h2>
-    <p>
-      縫い目がズレたけど、あえてそのままにした。<br>
-      完璧よりも、その時の記録を残したかった。
-    </p>
-  </article>
-
-</section>
+<footer>© ひとはり手帳</footer>
 
 </body>
 </html>
