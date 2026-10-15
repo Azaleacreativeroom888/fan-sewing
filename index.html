@@ -1,39 +1,172 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atelier Thread</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ひとはり手帳 | 裁縫の勉強サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sky: #a8dcee;
+  --sky-deep: #5fb4d4;
+  --sky-pale: #e3f4fa;
+  --cream: #fff7e0;
+  --cream-deep: #f4e5bd;
+  --ink: #2b5566;
+  --ink-soft: #4d7384;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+  line-height: 1.9;
+  font-size: 16px;
+}
+a { color: inherit; }
+a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+
+/* ヘッダー：ギンガムチェックの布 */
+.site-header {
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.45) 0 14px, transparent 14px 28px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.45) 0 14px, transparent 14px 28px),
+    var(--sky);
+  border-bottom: 3px dashed var(--ink);
+  padding: 14px 20px;
+}
+.header-inner {
+  max-width: 960px; margin: 0 auto;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px;
+}
+.logo {
+  background: var(--cream);
+  padding: 4px 18px;
+  border: 2px dashed var(--ink);
+  border-radius: 8px;
+  font-weight: 700; font-size: 1.15rem; text-decoration: none; letter-spacing: .08em;
+}
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 8px; }
+nav a {
+  display: block; padding: 4px 16px; border-radius: 999px;
+  background: var(--cream); text-decoration: none; font-weight: 500; font-size: .95rem;
+}
+nav a:hover, nav a[aria-current="page"] { background: var(--ink); color: var(--cream); }
+
+main { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+/* ヒーロー */
+.hero { padding: 64px 0 48px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: center; }
+.hero h1 { font-size: clamp(2rem, 5.5vw, 3.2rem); line-height: 1.35; margin: 0 0 16px; letter-spacing: .04em; }
+.hero p { margin: 0 0 24px; color: var(--ink-soft); max-width: 30em; }
+.btn {
+  display: inline-block; background: var(--ink); color: var(--cream);
+  padding: 10px 28px; border-radius: 999px; text-decoration: none; font-weight: 700;
+}
+.btn:hover { background: var(--sky-deep); color: var(--ink); }
+.hero-art { width: 100%; height: auto; }
+.thread { stroke-dasharray: 9 9; animation: stitch 2.4s linear infinite; }
+@keyframes stitch { to { stroke-dashoffset: -36; } }
+@media (prefers-reduced-motion: reduce) { .thread { animation: none; } }
+
+/* 見出し：縫い目つき */
+section { padding: 24px 0 40px; }
+h2 { font-size: 1.5rem; margin: 0 0 24px; padding-bottom: 8px; border-bottom: 3px dashed var(--sky-deep); display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+h2 a { font-size: .9rem; font-weight: 500; }
+
+/* ブログ：つぶやき形式 */
+.posts { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.post { background: var(--paper); border: 2px dashed var(--sky-deep); border-radius: 14px; padding: 14px 20px; }
+.post time { display: block; font-size: .85rem; color: var(--ink-soft); font-weight: 700; }
+.post p { margin: 2px 0 0; }
+
+/* ギャラリー */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 20px; }
+.tile {
+  aspect-ratio: 4 / 5; background: var(--sky-pale);
+  border: 3px dashed var(--ink); border-radius: 6px; outline: 8px solid var(--sky-pale); outline-offset: -1px;
+  display: grid; place-items: center; text-align: center; color: var(--ink-soft); font-size: .9rem; padding: 12px;
+}
+
+/* About */
+.about { background: var(--sky-pale); border-radius: 16px; padding: 28px 28px 20px; border: 2px solid var(--sky); }
+.about p { margin: 0 0 12px; max-width: 34em; }
+
+footer { background: var(--sky); border-top: 3px dashed var(--ink); text-align: center; padding: 18px 20px; font-size: .9rem; margin-top: 24px; }
+
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; padding-top: 40px; }
+  .hero-art { max-width: 320px; margin: 0 auto; }
+}
+</style>
 </head>
 <body>
 
-<header>
-  <h1>Atelier Thread</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="blog.html">Blog</a>
-    <a href="about.html">About</a>
-  </nav>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">ひとはり手帳</a>
+    <nav aria-label="メインメニュー">
+      <ul>
+        <li><a href="index.html" aria-current="page">ホーム</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+        <li><a href="gallery.html">ギャラリー</a></li>
+        <li><a href="about.html">このサイトについて</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<section class="hero">
-  <h2>ゆっくり作る、布の時間</h2>
-  <p>量産しないものづくりと、アナログな記録</p>
-</section>
+<main>
+  <div class="hero">
+    <div>
+      <h1>ひと針ずつ、<br>できることを増やす。</h1>
+      <p>裁縫の勉強の記録と、漫画やイラストを置いておく小さなアトリエです。毎日の進み具合をゆっくり残していきます。</p>
+      <a class="btn" href="blog.html">勉強の記録を見る</a>
+    </div>
+    <svg class="hero-art" viewBox="0 0 320 260" role="img" aria-label="針と糸のイラスト">
+      <rect x="20" y="30" width="280" height="200" rx="18" fill="#fff" stroke="#2b5566" stroke-width="3" stroke-dasharray="10 8"/>
+      <path class="thread" d="M40 190 C 90 110, 130 230, 180 150 S 250 90, 280 60" fill="none" stroke="#5fb4d4" stroke-width="5" stroke-linecap="round"/>
+      <g transform="rotate(-38 235 80)">
+        <rect x="150" y="76" width="160" height="8" rx="4" fill="#2b5566"/>
+        <ellipse cx="288" cy="80" rx="5" ry="3" fill="#fff7e0"/>
+      </g>
+      <circle cx="60" cy="60" r="16" fill="#a8dcee" stroke="#2b5566" stroke-width="3"/>
+      <circle cx="60" cy="60" r="3" fill="#2b5566"/><circle cx="52" cy="60" r="2" fill="#2b5566"/><circle cx="68" cy="60" r="2" fill="#2b5566"/>
+    </svg>
+  </div>
 
-<section class="intro">
-  <h3>このサイトについて</h3>
-  <p>
-    ミシンと手作業で作った作品を記録しています。<br>
-    ただ作るだけではなく、「なぜ作ったか」も大切にしています。
-  </p>
-</section>
+  <section aria-labelledby="blog-h">
+    <h2 id="blog-h">最近の記録 <a href="blog.html">ブログをもっと見る</a></h2>
+    <ul class="posts">
+      <li class="post"><time datetime="2026-10-15">2026.10.15</time><p>ここに今日の勉強の進み具合を書きます。例：まつり縫いの練習をした。</p></li>
+      <li class="post"><time datetime="2026-10-14">2026.10.14</time><p>ここに前の日の記録が入ります。</p></li>
+      <li class="post"><time datetime="2026-10-13">2026.10.13</time><p>ここにさらに前の日の記録が入ります。</p></li>
+    </ul>
+  </section>
 
-<footer>
-  <p>© Atelier Thread</p>
-</footer>
+  <section aria-labelledby="gal-h">
+    <h2 id="gal-h">ギャラリー <a href="gallery.html">作品をもっと見る</a></h2>
+    <div class="tiles">
+      <div class="tile">漫画・イラスト<br>（ここに画像）</div>
+      <div class="tile">漫画・イラスト<br>（ここに画像）</div>
+      <div class="tile">漫画・イラスト<br>（ここに画像）</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="about-h">
+    <h2 id="about-h">このサイトについて</h2>
+    <div class="about">
+      <p>裁縫を一から学びながら、その記録と作品をまとめているサイトです。</p>
+      <p><a href="about.html">くわしいプロフィールを見る</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>© ひとはり手帳</footer>
 
 </body>
 </html>
